@@ -1,0 +1,10 @@
+<% title = 'Editar Gênero' %>
+
+<h2>Editar Gênero</h2>
+
+<form action="/generos/<%= genero.id %>?_method=PUT" method="POST" class="form">
+  <label for="nome">Nome:</label>
+  <input type="text" name="nome" id="nome" value="<%= genero.nome %>" required>
+
+  <button type="submit" class="button">Atualizar</button>
+</form>

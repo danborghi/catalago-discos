@@ -1,0 +1,20 @@
+<% title = 'Editar Artista' %>
+
+<h2>Editar Artista</h2>
+
+<form action="/artistas/<%= artista.id %>?_method=PUT" method="POST" class="form">
+  <label for="nome">Nome:</label>
+  <input type="text" name="nome" id="nome" value="<%= artista.nome %>" required>
+
+  <label>Gêneros:</label>
+  <div class="checkbox-group">
+    <% generos.forEach(function(genero) { %>
+      <label>
+        <input type="checkbox" name="generoIds" value="<%= genero.id %>" <%= artista.Generos.some(g => g.id === genero.id) ? 'checked' : '' %>>
+        <%= genero.nome %>
+      </label>
+    <% }); %>
+  </div>
+
+  <button type="submit" class="button">Atualizar</button>
+</form>

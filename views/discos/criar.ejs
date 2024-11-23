@@ -1,0 +1,34 @@
+<% title = 'Criar Disco' %>
+
+<h2>Criar Novo Disco</h2>
+
+<form action="/discos" method="POST" enctype="multipart/form-data" class="form">
+  <label for="titulo">Título:</label>
+  <input type="text" name="titulo" id="titulo" required>
+
+  <label for="anoLancamento">Ano de Lançamento:</label>
+  <input type="number" name="anoLancamento" id="anoLancamento" required>
+
+  <label for="capa">Capa:</label>
+  <input type="file" name="capa" id="capa">
+
+  <label for="artistaId">Artista:</label>
+  <select name="artistaId" id="artistaId">
+    <option value="">Selecione um artista</option>
+    <% artistas.forEach(function(artista) { %>
+      <option value="<%= artista.id %>"><%= artista.nome %></option>
+    <% }); %>
+  </select>
+
+  <label>Gêneros:</label>
+  <div class="checkbox-group">
+    <% generos.forEach(function(genero) { %>
+      <label>
+        <input type="checkbox" name="generoIds" value="<%= genero.id %>">
+        <%= genero.nome %>
+      </label>
+    <% }); %>
+  </div>
+
+  <button type="submit" class="button">Salvar</button>
+</form>

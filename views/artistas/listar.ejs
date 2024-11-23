@@ -1,0 +1,34 @@
+<% title = 'Lista de Artistas' %>
+
+<h2>Lista de Artistas</h2>
+
+<a href="/artistas/criar" class="button">Adicionar Novo Artista</a>
+
+<form action="/artistas/buscar" method="GET" class="search-form">
+  <input type="text" name="nome" placeholder="Nome">
+  <input type="text" name="genero" placeholder="Gênero">
+  <button type="submit">Buscar</button>
+</form>
+
+<ul class="artista-list">
+  <% artistas.forEach(function(artista) { %>
+    <li class="artista-item">
+      <h3><%= artista.nome %></h3>
+      <p><strong>Gêneros:</strong>
+        <% artista.Generos.forEach(function(genero, index) { %>
+          <%= genero.nome %><%= index < artista.Generos.length - 1 ? ', ' : '' %>
+        <% }); %>
+      </p>
+      <p><strong>Discos:</strong></p>
+      <ul>
+        <% artista.Discos.forEach(function(disco) { %>
+          <li><%= disco.titulo %> (<%= disco.anoLancamento %>)</li>
+        <% }); %>
+      </ul>
+      <a href="/artistas/<%= artista.id %>/editar" class="button">Editar</a>
+      <form action="/artistas/<%= artista.id %>?_method=DELETE" method="POST" class="inline-form">
+        <button type="submit" class="button button-danger">Remover</button>
+      </form>
+    </li>
+  <% }); %>
+</ul>

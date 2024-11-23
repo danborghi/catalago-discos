@@ -1,0 +1,22 @@
+<% title = 'Lista de Gêneros' %>
+
+<h2>Lista de Gêneros</h2>
+
+<a href="/generos/criar" class="button">Adicionar Novo Gênero</a>
+
+<form action="/generos/buscar" method="GET" class="search-form">
+  <input type="text" name="nome" placeholder="Nome do Gênero">
+  <button type="submit">Buscar</button>
+</form>
+
+<ul class="genero-list">
+  <% generos.forEach(function(genero) { %>
+    <li class="genero-item">
+      <h3><%= genero.nome %></h3>
+      <a href="/generos/<%= genero.id %>/editar" class="button">Editar</a>
+      <form action="/generos/<%= genero.id %>?_method=DELETE" method="POST" class="inline-form">
+        <button type="submit" class="button button-danger">Remover</button>
+      </form>
+    </li>
+  <% }); %>
+</ul>

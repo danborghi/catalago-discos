@@ -1,0 +1,20 @@
+<% title = 'Criar Artista' %>
+
+<h2>Criar Novo Artista</h2>
+
+<form action="/artistas" method="POST" class="form">
+  <label for="nome">Nome:</label>
+  <input type="text" name="nome" id="nome" required>
+
+  <label>Gêneros:</label>
+  <div class="checkbox-group">
+    <% generos.forEach(function(genero) { %>
+      <label>
+        <input type="checkbox" name="generoIds" value="<%= genero.id %>">
+        <%= genero.nome %>
+      </label>
+    <% }); %>
+  </div>
+
+  <button type="submit" class="button">Salvar</button>
+</form>

@@ -1,0 +1,37 @@
+<% title = 'Editar Disco' %>
+
+<h2>Editar Disco</h2>
+
+<form action="/discos/<%= disco.id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="form">
+  <label for="titulo">Título:</label>
+  <input type="text" name="titulo" id="titulo" value="<%= disco.titulo %>" required>
+
+  <label for="anoLancamento">Ano de Lançamento:</label>
+  <input type="number" name="anoLancamento" id="anoLancamento" value="<%= disco.anoLancamento %>" required>
+
+  <label for="capa">Capa:</label>
+  <% if (disco.capa) { %>
+    <img src="/uploads/<%= disco.capa %>" alt="<%= disco.titulo %>" class="disco-capa">
+  <% } %>
+  <input type="file" name="capa" id="capa">
+
+  <label for="artistaId">Artista:</label>
+  <select name="artistaId" id="artistaId">
+    <option value="">Selecione um artista</option>
+    <% artistas.forEach(function(artista) { %>
+      <option value="<%= artista.id %>" <%= disco.ArtistaId === artista.id ? 'selected' : '' %>><%= artista.nome %></option>
+    <% }); %>
+  </select>
+
+  <label>Gêneros:</label>
+  <div class="checkbox-group">
+    <% generos.forEach(function(genero) { %>
+      <label>
+        <input type="checkbox" name="generoIds" value="<%= genero.id %>" <%= disco.Generos.some(g => g.id === genero.id) ? 'checked' : '' %>>
+        <%= genero.nome %>
+      </label>
+    <% }); %>
+  </div>
+
+  <button type="submit" class="button">Atualizar</button>
+</form>

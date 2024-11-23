@@ -1,0 +1,43 @@
+<% title = 'Lista de Discos' %>
+
+<h2>Lista de Discos</h2>
+
+<a href="/discos/criar" class="button">Adicionar Novo Disco</a>
+
+<form action="/discos/buscar" method="GET" class="search-form">
+  <input type="text" name="titulo" placeholder="Título">
+  <input type="text" name="artista" placeholder="Artista">
+  <input type="text" name="genero" placeholder="Gênero">
+  <button type="submit">Buscar</button>
+</form>
+
+<ul class="disco-list">
+  <% discos.forEach(function(disco) { %>
+    <li class="disco-item">
+      <% if (disco.capa) { %>
+        <img src="/uploads/<%= disco.capa %>" alt="<%= disco.titulo %>" class="disco-capa">
+      <% } else { %>
+        <img src="/images/placeholder.png" alt="Sem capa" class="disco-capa">
+      <% } %>
+      <div class="disco-info">
+        <h3><%= disco.titulo %> (<%= disco.anoLancamento %>)</h3>
+        <p><strong>Artista:</strong> <%= disco.Artista ? disco.Artista.nome : 'N/A' %></p>
+        <p><strong>Gêneros:</strong>
+          <% disco.Generos.forEach(function(genero, index) { %>
+            <%= genero.nome %><%= index < disco.Generos.length - 1 ? ', ' : '' %>
+          <% }); %>
+        </p>
+        <p><strong>Faixas:</strong></p>
+        <ul>
+          <% disco.Faixas.forEach(function(faixa) { %>
+            <li><%= faixa.titulo %> - <%= faixa.duracao %></li>
+          <% }); %>
+        </ul>
+        <a href="/discos/<%= disco.id %>/editar" class="button">Editar</a>
+        <form action="/discos/<%= disco.id %>?_method=DELETE" method="POST" class="inline-form">
+          <button type="submit" class="button button-danger">Remover</button>
+        </form>
+      </div>
+    </li>
+  <% }); %>
+</ul>
